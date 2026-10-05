@@ -1,0 +1,32 @@
+# Python environments and generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Notebook and tool caches
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.DS_Store
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Training data and generated artifacts
+/data/
+/checkpoints/
+/runs/
+/wandb/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
