@@ -1,18 +1,22 @@
 # Attention Mechanisms
 
-This directory is the starting point of Transformer Workshop: attention mechanisms implemented explicitly in PyTorch, with small experiments to understand their behavior.
+Handwritten PyTorch components for studying Transformers.
 
-## Current Implementation
+- [transformer.ipynb](transformer.ipynb): explanations, paper diagrams, and CPU/MPS experiments.
+- [classic_transformer.py](classic_transformer.py): the notebook's seven reusable classes, without example execution or device selection on import.
 
-[transformer.ipynb](transformer.ipynb) contains a single-head scaled dot-product self-attention experiment and a backward pass for inspecting learned parameter gradients.
+Hidden states use `(B, I, D)`; token IDs use `(B, I)`. Single-head attention is unmasked. Multi-head attention and the post-LayerNorm Transformer block are causal. Sinusoidal positions are fixed buffers; the character tokenizer supports only its known vocabulary. The original initialization and class names are preserved.
 
-The input convention is `(D, I)`: each column is a token, and each row is one embedding feature. With `num_att_heads=1`, the query, key, and value projection matrices have shape `(D, D)`.
+From a notebook running at the repository root:
 
-The score matrix is computed as `Q.t() @ K`, so its rows represent query tokens and its columns represent key tokens. Softmax normalizes each row, and the output is a weighted sum of value vectors for each query token.
+```python
+from attention_mechanism.classic_transformer import (
+    Embedding_Block,
+    PositionalEncoding_Block,
+    Transformer_Block,
+)
+```
 
-## Next Steps
+From a notebook running inside this directory, use `from classic_transformer import ...`. Check `Path.cwd()` if an import fails.
 
-- Extract a reusable Python module and support batches of sequences.
-- Add padding and causal masks.
-- Implement multi-head attention and cross-attention.
-- Check each implementation against small examples and independent references.
+Next: train a subword tokenizer, assemble a small GPT with a vocabulary prediction head, and implement next-token training and generation. Padding masks and cross-attention remain future exercises. Notebook definitions and the extracted module are separate copies; edits do not synchronize automatically.
